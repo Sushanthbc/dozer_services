@@ -13,3 +13,11 @@ development:
 test:
   <<: *default
   database: dozer_services_test
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  database: dozer_services_production
+  username: root
+  password: <%= ENV['DATABASE_PASSWORD'] %>
