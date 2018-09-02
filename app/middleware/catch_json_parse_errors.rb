@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class CatchJsonParseErrors
   def initialize(app)
     @app = app
@@ -7,7 +5,7 @@ class CatchJsonParseErrors
 
   def call(env)
     @app.call(env)
-  rescue ActionDispatch::ParamsParser::ParseError => error
+  rescue ActionDispatch::Http::Parameters::ParseError => error
     if /application\/json/.match?(env['HTTP_ACCEPT'])
       error_output = "There was a problem in the JSON you submitted: #{error}"
       [
