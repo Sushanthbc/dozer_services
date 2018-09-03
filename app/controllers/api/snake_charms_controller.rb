@@ -28,7 +28,7 @@ module Api
                                           :snake_behavior,
                                           :snake_macro_habitat,
                                           :snake_micro_habitat, :snake_condition,
-                                          :release_date, :user_id)
+                                          :release_date, :user_id, :snake_photo)
     end
   end
 end
