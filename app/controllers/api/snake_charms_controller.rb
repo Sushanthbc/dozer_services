@@ -8,9 +8,11 @@ module Api
 
     def create
       user = User.find_by_id(params[:snake_charm][:user_id])
-      if user.snake_charms.create(snake_charm_params).save!
-        render json: { status: 'success' }
-      end
+      user.snake_charms.create!(snake_charm_params)
+      user.attach(params[:snake_charm][:snake_photo])
+      render json: { status: 'success' }
+    # rescue Exception => e
+    #   raise e
     end
 
     private
@@ -21,7 +23,6 @@ module Api
                                           :caller_phone, :snake_length,
                                           :snake_length_unit,
                                           :snake_weight, :snake_weight_unit,
-                                          :snake_sex,
                                           :snake_sex, :snake_color,
                                           :snake_divided_sub_caudals,
                                           :snake_undivided_sub_caudals,
