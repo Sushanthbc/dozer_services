@@ -5,7 +5,6 @@ ruby '2.4.2'
 gem 'rails', '~> 5.2.1'
 gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.1.0', require: false
-gem "google-cloud-storage", "~> 1.8", require: false
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -23,6 +22,7 @@ end
 
 group :production do
   gem 'pg', '~> 0.18.4'
+  gem "aws-sdk-s3", require: false
 end
 
 

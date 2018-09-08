@@ -8,11 +8,9 @@ module Api
 
     def create
       user = User.find_by_id(params[:snake_charm][:user_id])
-      user.snake_charms.create!(snake_charm_params)
-      user.attach(params[:snake_charm][:snake_photo])
-      render json: { status: 'success' }
-    # rescue Exception => e
-    #   raise e
+      if user.snake_charms.create!(snake_charm_params)
+        render json: { status: 'success' }
+      end
     end
 
     private
