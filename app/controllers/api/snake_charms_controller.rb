@@ -8,7 +8,7 @@ module Api
 
     def create
       user = User.find_by_id(params[:snake_charm][:user_id])
-      if user.snake_charms.create(snake_charm_params).save!
+      if user.snake_charms.create!(snake_charm_params)
         render json: { status: 'success' }
       end
     end
@@ -21,14 +21,13 @@ module Api
                                           :caller_phone, :snake_length,
                                           :snake_length_unit,
                                           :snake_weight, :snake_weight_unit,
-                                          :snake_sex,
                                           :snake_sex, :snake_color,
                                           :snake_divided_sub_caudals,
                                           :snake_undivided_sub_caudals,
                                           :snake_behavior,
                                           :snake_macro_habitat,
                                           :snake_micro_habitat, :snake_condition,
-                                          :release_date, :user_id)
+                                          :release_date, :user_id, :snake_photo)
     end
   end
 end
