@@ -3,9 +3,9 @@
 module Api
   class SnakeCharmsController < ApplicationController
     def index
-      snake_charms = SnakeCharm.all
-      caudals_processing snake_charms
-      render json: { snake_charm: snake_charms,
+      snake_charms_hash = SnakeCharm.fetch_snake_charms
+      snake_charms_processing = SnakeCharm.caudals_processing snake_charms_hash
+      render json: { snake_charm: snake_charms_processing,
                      status: 'success' }
     end
 
@@ -13,17 +13,6 @@ module Api
       user = User.find_by_id(params[:snake_charm][:user_id])
       if user.snake_charms.create!(snake_charm_params)
         render json: { status: 'success' }
-      end
-    end
-
-    def caudals_processing(snake_charms)
-      caudals_hash = snake_charms.map { |e| e.attributes.symbolize_keys }
-      caudals_hash.each do |caudal|
-        if (caudal[:snake_caudals]).include?('D') || (caudal[:snake_caudals]).include?('U')
-          caudal_string = caudal[:snake_caudal]
-          #TODO: Keep parsing and adding it to hash of objects
-          
-        end
       end
     end
 
