@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_03_132546) do
+ActiveRecord::Schema.define(version: 2018_09_11_145057) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -47,8 +47,6 @@ ActiveRecord::Schema.define(version: 2018_09_03_132546) do
     t.string "snake_weight_unit", null: false
     t.string "snake_sex", null: false
     t.string "snake_color", null: false
-    t.integer "snake_divided_sub_caudals"
-    t.integer "snake_undivided_sub_caudals"
     t.string "snake_behavior", null: false
     t.string "snake_macro_habitat", null: false
     t.string "snake_micro_habitat", null: false
@@ -57,6 +55,7 @@ ActiveRecord::Schema.define(version: 2018_09_03_132546) do
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "snake_caudals"
     t.index ["user_id"], name: "index_snake_charms_on_user_id"
   end
 
