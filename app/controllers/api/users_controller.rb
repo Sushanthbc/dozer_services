@@ -42,7 +42,11 @@ module Api
 
     # account check
     def account_check
-      user = User.exists?(email_id: params[:user][:email_id])
+      if User.exists?(email_id: params[:user][:email_id])
+        user = User.find_by_email_id(params[:user][:email_id])
+      else
+        user = false
+      end
       render json: {
         user: user,
         status: 'success'
