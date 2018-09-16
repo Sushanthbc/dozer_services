@@ -2,7 +2,7 @@
 
 module Api
   class UsersController < ApplicationController
-
+    before_action :account_check_params, only: [:account_check]
     # fetch all profiles
     def index
       users = User.all
@@ -23,8 +23,10 @@ module Api
 
     # create profile
     def create
-      if User.create!(user_params)
+      user = User.create!(user_params)
+      if user
         render json: {
+          user: user,
           status: 'success'
         }
       end
@@ -42,16 +44,26 @@ module Api
 
     # account check
     def account_check
-      user = User.exists?(email_id: params[:email_id])
+      if User.exists?(email_id: params[:user][:email_id])
+        user = User.find_by_email_id(params[:user][:email_id])
+      else
+        user = false
+      end
       render json: {
         user: user,
         status: 'success'
       }
     end
 
+    private
+
     def user_params
       params.require(:user).permit(:first_name, :last_name, :email_id,
-                                   :phone, :admin)
+                                   :phone, :admin, :about_user, :purpose)
+    end
+
+    def account_check_params
+      params.require(:user).permit(:email_id)
     end
   end
 end

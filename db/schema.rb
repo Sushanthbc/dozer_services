@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_11_145057) do
+ActiveRecord::Schema.define(version: 2018_09_16_171136) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -59,14 +59,30 @@ ActiveRecord::Schema.define(version: 2018_09_11_145057) do
     t.index ["user_id"], name: "index_snake_charms_on_user_id"
   end
 
+  create_table "snake_photo_tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.boolean "head_lateral_left", default: false
+    t.boolean "head_lateral_right", default: false
+    t.boolean "rostral", default: false
+    t.boolean "head_dorsal", default: false
+    t.boolean "hood_dorsal", default: false
+    t.boolean "full_body", default: false
+    t.boolean "subcaudals", default: false
+    t.bigint "active_storage_attachment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["active_storage_attachment_id"], name: "index_snake_photo_tags_on_active_storage_attachment_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "email_id", null: false
     t.string "phone", null: false
-    t.string "admin", null: false
+    t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "about_user"
+    t.string "purpose"
   end
 
 end
