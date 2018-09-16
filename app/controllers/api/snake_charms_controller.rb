@@ -23,8 +23,10 @@ module Api
 
     def create
       user = User.find_by_id(params[:snake_charm][:user_id])
-      if user.snake_charms.create!(snake_charm_params)
-        render json: { status: 'success' }
+      snake_charm_inst = user.snake_charms.create!(snake_charm_params)
+      if snake_charm_inst
+        render json: { snake_charm_details: snake_charm_inst,
+          status: 'success' }
       end
     end
 
@@ -46,7 +48,8 @@ module Api
                                           :snake_macro_habitat,
                                           :snake_micro_habitat,
                                           :snake_condition,
-                                          :release_date, :user_id, :snake_photo)
+                                          :release_date, :user_id,
+                                          snake_photos: [])
     end
   end
 end
