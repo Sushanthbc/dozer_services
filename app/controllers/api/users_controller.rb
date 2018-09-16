@@ -53,7 +53,7 @@ module Api
 
     def user_params
       params.require(:user).permit(:first_name, :last_name, :email_id,
-                                   :phone, :admin)
+                                   :phone, :admin, :about_user, :purpose)
     end
 
     def account_check_params
