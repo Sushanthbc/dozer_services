@@ -23,8 +23,10 @@ module Api
 
     # create profile
     def create
-      if User.create!(user_params)
+      user = User.create!(user_params)
+      if user
         render json: {
+          user: user,
           status: 'success'
         }
       end
