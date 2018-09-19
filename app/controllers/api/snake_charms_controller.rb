@@ -29,7 +29,7 @@ module Api
     end
 
     def admin_access(user_id)
-      User.where(id: user_id).first.admin == '1'
+      User.where(id: user_id).first.admin == true
     end
 
     private
