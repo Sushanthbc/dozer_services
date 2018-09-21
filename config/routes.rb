@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   namespace 'api' do
     resources :snake_charms, only: %i[create update]
     resources :users
+    resources :snake_photo_tags
     get '/users/account_check/:email_id' => 'users#account_check'
     get '/snake_charms/all_snake_charms/:user_id' =>
     'snake_charms#all_snake_charms'

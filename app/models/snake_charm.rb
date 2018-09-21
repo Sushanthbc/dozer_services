@@ -18,7 +18,7 @@ class SnakeCharm < ApplicationRecord
     end
     snake_charms_hash
   rescue Exception::NoMethodError => e
-    return snake_charms_hash = []
+    raise e
   end
 
   def self.fetch_snake_charms

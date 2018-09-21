@@ -1,3 +1,3 @@
 class ActiveStorageAttachment < ApplicationRecord
-  has_many :snake_photo_tags
+  has_one :snake_photo_tag
 end
