@@ -2,6 +2,7 @@
 
 module Api
   class SnakeCharmsController < ApplicationController
+    before_action
     def all_snake_charms
       if admin_access(params[:user_id])
         snake_charms_hash = SnakeCharm.fetch_snake_charms
@@ -28,6 +29,15 @@ module Api
         render json: { snake_charm_details: snake_charm_inst,
           status: 'success' }
       end
+    end
+
+    def show
+      snake_charm = SnakeCharm.find_by_id(params[:id])
+      photos = []
+      snake_charm.snake_photos.each do |photo|
+        photos.push(url_for(photo))
+      end
+      render json: snake_charm.as_json.merge({snake_photos: photos})
     end
 
     def admin_access(user_id)
