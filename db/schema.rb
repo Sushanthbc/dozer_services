@@ -78,9 +78,11 @@ ActiveRecord::Schema.define(version: 2018_09_16_115124) do
     t.string "last_name", null: false
     t.string "email_id", null: false
     t.string "phone", null: false
-    t.string "admin", null: false
+    t.boolean "admin", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "about_user"
+    t.string "purpose"
   end
 
 end
