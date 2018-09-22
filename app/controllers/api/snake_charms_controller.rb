@@ -2,6 +2,7 @@
 
 module Api
   class SnakeCharmsController < ApplicationController
+    before_action
     def all_snake_charms
       if admin_access(params[:user_id])
         snake_charms_hash = SnakeCharm.fetch_snake_charms
@@ -23,9 +24,20 @@ module Api
 
     def create
       user = User.find_by_id(params[:snake_charm][:user_id])
-      if user.snake_charms.create!(snake_charm_params)
-        render json: { status: 'success' }
+      snake_charm_inst = user.snake_charms.create!(snake_charm_params)
+      if snake_charm_inst
+        render json: { snake_charm_details: snake_charm_inst,
+          status: 'success' }
       end
+    end
+
+    def show
+      snake_charm = SnakeCharm.find_by_id(params[:id])
+      photos = []
+      snake_charm.snake_photos.each do |photo|
+        photos.push(url_for(photo))
+      end
+      render json: snake_charm.as_json.merge({snake_photos: photos})
     end
 
     def admin_access(user_id)
@@ -46,7 +58,8 @@ module Api
                                           :snake_macro_habitat,
                                           :snake_micro_habitat,
                                           :snake_condition,
-                                          :release_date, :user_id, :snake_photo)
+                                          :release_date, :user_id,
+                                          snake_photos: [])
     end
   end
 end

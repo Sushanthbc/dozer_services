@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SnakeCharm < ApplicationRecord
-  has_one_attached :snake_photo
+  has_many_attached :snake_photos
   belongs_to :user
   validates_format_of :caller_phone, with: /\A\d{10}+\Z/,
                                      message: 'Phone should match exact 10 digits'
@@ -18,7 +18,7 @@ class SnakeCharm < ApplicationRecord
     end
     snake_charms_hash
   rescue Exception::NoMethodError => e
-    return snake_charms_hash = []
+    raise e
   end
 
   def self.fetch_snake_charms
