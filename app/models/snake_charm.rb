@@ -21,6 +21,20 @@ class SnakeCharm < ApplicationRecord
     raise e
   end
 
+  # TODO: this method is not DRY clean it up
+  def self.caudal_processing(snake_charms_hash)
+    binding.pry
+    caudals_string = snake_charms_hash[:snake_caudals]
+    snake_charms_hash[:snake_caudals] = {}
+    snake_charms_hash['snake_caudals']['divided'] =
+        (caudals_string.split(';')[0]).split(':')[1]
+    snake_charms_hash['snake_caudals']['undivided'] =
+        (caudals_string.split(';')[1]).split(':')[1]
+    snake_charms_hash
+  rescue Exception::NoMethodError => e
+    raise e
+  end
+
   def self.fetch_snake_charms
     snake_charms = SnakeCharm.all
     SnakeCharm.symbolize_object snake_charms
