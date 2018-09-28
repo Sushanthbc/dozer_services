@@ -69,7 +69,7 @@ module Api
                                           :release_date, :user_id,
                                           :latitude, :longitude,
                                           :elevation, :elevation_unit,
-                                          :general_remarks, :bite_report
+                                          :general_remarks, :bite_report,
                                           snake_photos: [])
     end
   end
