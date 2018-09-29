@@ -3,7 +3,7 @@
 class SnakeCharm < ApplicationRecord
   has_many_attached :snake_photos
   belongs_to :user
-  validates_format_of :caller_phone, with: /\A\d{10}+\Z/,
+  validates_format_of :caller_phone, with: /\A\d{1,13}+\Z/,
                                      message: 'Phone should match exact 10 digits'
   validates_presence_of :caller_name, :caller_phone, :address,
                         :village, :pincode, :snake_length,

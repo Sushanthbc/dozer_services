@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_28_040736) do
+ActiveRecord::Schema.define(version: 2018_09_29_041847) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -34,23 +34,23 @@ ActiveRecord::Schema.define(version: 2018_09_28_040736) do
   end
 
   create_table "snake_charms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.datetime "rescue_date_time", null: false
+    t.datetime "rescue_date_time"
     t.string "address", null: false
     t.string "village", null: false
     t.string "pincode", null: false
-    t.string "country", null: false
+    t.string "country"
     t.string "caller_name", null: false
     t.string "caller_phone", null: false
     t.float "snake_length", null: false
     t.string "snake_length_unit", null: false
-    t.float "snake_weight", null: false
-    t.string "snake_weight_unit", null: false
-    t.string "snake_sex", null: false
-    t.string "snake_color", null: false
-    t.string "snake_behavior", null: false
-    t.string "snake_macro_habitat", null: false
-    t.string "snake_micro_habitat", null: false
-    t.string "snake_condition", null: false
+    t.float "snake_weight"
+    t.string "snake_weight_unit"
+    t.string "snake_sex"
+    t.string "snake_color"
+    t.string "snake_behavior"
+    t.string "snake_macro_habitat"
+    t.string "snake_micro_habitat"
+    t.string "snake_condition"
     t.datetime "release_date"
     t.bigint "user_id"
     t.datetime "created_at", null: false
