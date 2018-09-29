@@ -5,6 +5,9 @@ class SnakeCharm < ApplicationRecord
   belongs_to :user
   validates_format_of :caller_phone, with: /\A\d{10}+\Z/,
                                      message: 'Phone should match exact 10 digits'
+  validates_presence_of :caller_name, :caller_phone, :address,
+                        :village, :pincode, :snake_length,
+                        :snake_length_unit
 
   def self.caudals_processing(snake_charms_hash)
     snake_charms_hash.each do |caudal|
@@ -21,27 +24,13 @@ class SnakeCharm < ApplicationRecord
     raise e
   end
 
-  # TODO: this method is not DRY clean it up
-  def self.caudal_processing(snake_charms_hash)
-    binding.pry
-    caudals_string = snake_charms_hash[:snake_caudals]
-    snake_charms_hash[:snake_caudals] = {}
-    snake_charms_hash['snake_caudals']['divided'] =
-        (caudals_string.split(';')[0]).split(':')[1]
-    snake_charms_hash['snake_caudals']['undivided'] =
-        (caudals_string.split(';')[1]).split(':')[1]
-    snake_charms_hash
-  rescue Exception::NoMethodError => e
-    raise e
-  end
-
   def self.fetch_snake_charms
-    snake_charms = SnakeCharm.all
+    snake_charms = SnakeCharm.all.order(created_at: :desc)
     SnakeCharm.symbolize_object snake_charms
   end
 
   def self.fetch_snake_charm_user_id(user_id)
-    snake_charm = SnakeCharm.where(user_id: user_id)
+    snake_charm = SnakeCharm.where(user_id: user_id).order(created_at: :desc)
     symbolize_object snake_charm
   end
 
