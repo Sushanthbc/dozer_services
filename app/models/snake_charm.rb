@@ -3,8 +3,11 @@
 class SnakeCharm < ApplicationRecord
   has_many_attached :snake_photos
   belongs_to :user
-  validates_format_of :caller_phone, with: /\A\d{10}+\Z/,
+  validates_format_of :caller_phone, with: /\A\d{1,13}+\Z/,
                                      message: 'Phone should match exact 10 digits'
+  validates_presence_of :caller_name, :caller_phone, :address,
+                        :village, :pincode, :snake_length,
+                        :snake_length_unit
 
   def self.caudals_processing(snake_charms_hash)
     snake_charms_hash.each do |caudal|
@@ -22,12 +25,12 @@ class SnakeCharm < ApplicationRecord
   end
 
   def self.fetch_snake_charms
-    snake_charms = SnakeCharm.all
+    snake_charms = SnakeCharm.all.order(created_at: :desc)
     SnakeCharm.symbolize_object snake_charms
   end
 
   def self.fetch_snake_charm_user_id(user_id)
-    snake_charm = SnakeCharm.where(user_id: user_id)
+    snake_charm = SnakeCharm.where(user_id: user_id).order(created_at: :desc)
     symbolize_object snake_charm
   end
 

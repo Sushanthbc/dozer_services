@@ -27,17 +27,25 @@ module Api
       snake_charm_inst = user.snake_charms.create!(snake_charm_params)
       if snake_charm_inst
         render json: { snake_charm_details: snake_charm_inst,
-          status: 'success' }
+                       status: 'success' }
+      end
+    end
+
+    def update
+      snake_charm = SnakeCharm.find_by_id(params[:id])
+      if snake_charm.update(snake_charm_params)
+        render json: { status: 'Updated Successfully' }
       end
     end
 
     def show
       snake_charm = SnakeCharm.find_by_id(params[:id])
+      snake_charms_processed = snake_charm
       photos = []
-      snake_charm.snake_photos.each do |photo|
+      snake_charms_processed.snake_photos.each do |photo|
         photos.push(url_for(photo))
       end
-      render json: snake_charm.as_json.merge({snake_photos: photos})
+      render json: snake_charms_processed.as_json.merge({snake_photos: photos})
     end
 
     def admin_access(user_id)
@@ -59,6 +67,9 @@ module Api
                                           :snake_micro_habitat,
                                           :snake_condition,
                                           :release_date, :user_id,
+                                          :latitude, :longitude,
+                                          :elevation, :elevation_unit,
+                                          :general_remarks, :bite_report,
                                           snake_photos: [])
     end
   end
