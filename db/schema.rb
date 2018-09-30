@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_29_041847) do
+ActiveRecord::Schema.define(version: 2018_09_30_063106) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2018_09_29_041847) do
     t.string "elevation_unit"
     t.string "general_remarks"
     t.string "bite_report"
+    t.string "number_of_bands"
     t.index ["user_id"], name: "index_snake_charms_on_user_id"
   end
 
