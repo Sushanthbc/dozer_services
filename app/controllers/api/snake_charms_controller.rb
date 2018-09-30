@@ -2,7 +2,6 @@
 
 module Api
   class SnakeCharmsController < ApplicationController
-    before_action
     def all_snake_charms
       if admin_access(params[:user_id])
         snake_charms_hash = SnakeCharm.fetch_snake_charms
