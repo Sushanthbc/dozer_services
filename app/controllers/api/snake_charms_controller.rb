@@ -10,14 +10,6 @@ module Api
       else
         snake_charms_processed = 'Not Authorized to view results'
       end
-      if snake_charms_processed.length.positive?
-        snake_charms_processed.each do |snake_charm|
-          user_info = User.find_by_id(snake_charm[:user_id])
-          created_by = user_info.first_name.to_s + ' ' +
-              user_info.last_name.to_s
-          snake_charm[:created_by] = created_by
-        end
-      end
       render json: { snake_charm: snake_charms_processed,
                      status: 'success' }
     end
