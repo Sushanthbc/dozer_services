@@ -40,11 +40,13 @@ module Api
     def show
       snake_charm = SnakeCharm.find_by_id(params[:id])
       snake_charms_processed = snake_charm
+      user_detail = SnakeCharm.add_user_details snake_charms_processed
       photos = []
       snake_charms_processed.snake_photos.each do |photo|
         photos.push(url_for(photo))
       end
-      render json: snake_charms_processed.as_json.merge({snake_photos: photos})
+      render json: snake_charms_processed.as_json.merge(snake_photos: photos,
+                                                        user_detail: user_detail)
     end
 
     def admin_access(user_id)

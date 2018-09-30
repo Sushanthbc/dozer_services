@@ -41,6 +41,10 @@ class SnakeCharm < ApplicationRecord
     symbolize_object snake_charm
   end
 
+  def self.add_user_details(snake_charm_hash)
+    User.where(id: snake_charm_hash[:user_id]).select('*')
+  end
+
   def self.symbolize_object(snake_charms)
     if snake_charms.nil?
       snake_charms_symbolize = []
