@@ -10,14 +10,21 @@ class SnakeCharm < ApplicationRecord
                         :snake_length_unit
 
   def self.caudals_processing(snake_charms_hash)
-    snake_charms_hash.each do |caudal|
-      next if caudal[:snake_caudals].nil?
-      caudals_string = caudal[:snake_caudals]
-      caudal[:snake_caudals] = {}
-      caudal[:snake_caudals][:divided] =
-        (caudals_string.split(';')[0]).split(':')[1]
-      caudal[:snake_caudals][:undivided] =
-        (caudals_string.split(';')[1]).split(':')[1]
+    if snake_charms_hash.length.positive?
+      snake_charms_hash.each do |caudal|
+        unless caudal[:snake_caudals].nil?
+          caudals_string = caudal[:snake_caudals]
+          caudal[:snake_caudals] = {}
+          caudal[:snake_caudals][:divided] =
+            (caudals_string.split(';')[0]).split(':')[1]
+          caudal[:snake_caudals][:undivided] =
+            (caudals_string.split(';')[1]).split(':')[1]
+        end
+        user_info = User.find_by_id(caudal[:user_id])
+        created_by =
+          user_info.first_name.to_s + ' ' + user_info.last_name.to_s
+        caudal[:created_by] = created_by
+      end
     end
     snake_charms_hash
   rescue Exception::NoMethodError => e
@@ -32,6 +39,10 @@ class SnakeCharm < ApplicationRecord
   def self.fetch_snake_charm_user_id(user_id)
     snake_charm = SnakeCharm.where(user_id: user_id).order(created_at: :desc)
     symbolize_object snake_charm
+  end
+
+  def self.add_user_details(snake_charm_hash)
+    User.where(id: snake_charm_hash[:user_id]).select('*')
   end
 
   def self.symbolize_object(snake_charms)
