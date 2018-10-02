@@ -24,17 +24,15 @@ module Api
     def create
       user = User.find_by_id(params[:snake_charm][:user_id])
       snake_charm_inst = user.snake_charms.create!(snake_charm_params)
-      if snake_charm_inst
-        render json: { snake_charm_details: snake_charm_inst,
-                       status: 'success' }
-      end
+      return unless snake_charm_inst.present?
+      render json: { snake_charm_details: snake_charm_inst,
+                     status: 'success' }
     end
 
     def update
       snake_charm = SnakeCharm.find_by_id(params[:id])
-      if snake_charm.update(snake_charm_params)
-        render json: { status: 'Updated Successfully' }
-      end
+      return unless snake_charm.update!(snake_charm_params)
+      render json: { status: 'Updated Successfully' }
     end
 
     def show
@@ -45,8 +43,10 @@ module Api
       snake_charms_processed.snake_photos.each do |photo|
         photos.push(url_for(photo))
       end
-      render json: snake_charms_processed.as_json.merge(snake_photos: photos,
-                                                        user_detail: user_detail)
+      json_response =
+        snake_charms_processed.as_json.merge(snake_photos: photos,
+                                             user_detail: user_detail)
+      render json: json_response
     end
 
     def admin_access(user_id)
