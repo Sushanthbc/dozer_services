@@ -7,7 +7,7 @@ class SnakeCharm < ApplicationRecord
                                      message: 'Phone should match exact 10 digits'
   validates_presence_of :caller_name, :caller_phone, :address,
                         :village, :pincode, :snake_length,
-                        :snake_length_unit
+                        :snake_length_unit, :nature_of_sighting
 
   def self.caudals_processing(snake_charms_hash)
     if snake_charms_hash.length.positive?

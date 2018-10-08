@@ -63,7 +63,7 @@ ActiveRecord::Schema.define(version: 2018_10_08_082330) do
     t.string "general_remarks"
     t.string "bite_report"
     t.string "number_of_bands"
-    t.string "nature_of_sighting", null: false
+    t.string "nature_of_sighting"
     t.index ["user_id"], name: "index_snake_charms_on_user_id"
   end
 
