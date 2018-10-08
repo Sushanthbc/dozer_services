@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 2018_10_08_082330) do
     t.datetime "updated_at", null: false
     t.string "about_user"
     t.string "purpose"
-    t.string "town", null: false
+    t.string "town"
   end
 
 end
