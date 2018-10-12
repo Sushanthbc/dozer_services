@@ -71,7 +71,7 @@ module Api
                                           :latitude, :longitude,
                                           :elevation, :elevation_unit,
                                           :general_remarks, :bite_report,
-                                          :number_of_bands,
+                                          :number_of_bands, :nature_of_sighting,
                                           snake_photos: [])
     end
   end
